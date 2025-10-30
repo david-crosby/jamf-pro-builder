@@ -167,8 +167,17 @@ run_setup() {
         log_warning "Mail server setup failed, but continuing..."
     fi
     
-    # Module 5: ADE and PreStage Enrolment
-    log_info "Starting Module 5: ADE and PreStage Enrolment"
+    # Module 5: Platform SSO (macOS 26 Enhanced)
+    log_info "Starting Module 5: Platform SSO (macOS 26)"
+    if source "${SCRIPT_DIR}/jamf-platform-sso.sh" && setup_platform_sso; then
+        completed_modules+=("Platform SSO")
+    else
+        failed_modules+=("Platform SSO")
+        log_warning "Platform SSO setup failed, but continuing..."
+    fi
+    
+    # Module 6: ADE and PreStage Enrolment
+    log_info "Starting Module 6: ADE and PreStage Enrolment"
     if source "${SCRIPT_DIR}/jamf-ade-prestage.sh" && setup_ade_and_prestage; then
         completed_modules+=("ADE and PreStage")
     else
@@ -176,8 +185,8 @@ run_setup() {
         log_warning "ADE and PreStage setup failed, but continuing..."
     fi
     
-    # Module 6: User Accounts
-    log_info "Starting Module 6: User Accounts"
+    # Module 7: User Accounts
+    log_info "Starting Module 7: User Accounts"
     if source "${SCRIPT_DIR}/jamf-users.sh" && setup_users; then
         completed_modules+=("User Accounts")
     else
@@ -227,11 +236,13 @@ run_setup() {
     fi
     
     log_info "3. Verify SSO configuration through the Jamf Pro web interface"
-    log_info "4. Test mail server by sending test notifications"
-    log_info "5. Complete ADE setup in Apple Business Manager (if not done)"
-    log_info "6. Test zero-touch deployment with a test device"
-    log_info "7. Review CIS benchmark compliance reports"
-    log_info "8. Configure Jamf Connect or Platform SSO profiles if enabled"
+    log_info "4. Verify Platform SSO is deployed to macOS 26+ devices"
+    log_info "5. Test mail server by sending test notifications"
+    log_info "6. Complete ADE setup in Apple Business Manager (if not done)"
+    log_info "7. Test zero-touch deployment with a macOS 26 device"
+    log_info "8. Review CIS benchmark compliance reports"
+    log_info "9. Verify Declarative Device Management (DDM) is active on macOS 26+ devices"
+    log_info "10. Enable Rapid Security Response for automatic security updates"
     echo ""
     
     if [[ "${setup_success}" == "true" && ${#failed_modules[@]} -eq 0 ]]; then

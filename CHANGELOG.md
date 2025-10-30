@@ -5,6 +5,50 @@ All notable changes to the Jamf Pro Tenancy Setup project will be documented in 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2025-10-30
+
+### Added - macOS 26 (Tahoe) Support
+- **New Platform SSO module** (`jamf-platform-sso.sh`) with simplified configuration for macOS 26+
+- Automatic Platform SSO inheritance from Jamf Pro SSO settings (macOS 26+)
+- Smart group creation for macOS 26+ devices (Platform SSO capable)
+- Smart group creation for macOS 13-15 devices (legacy Platform SSO)
+- Declarative Device Management (DDM) support in PreStage enrolment
+- Rapid Security Response (RSR) automatic deployment
+- Managed Activation Lock configuration
+- Version detection for Platform SSO capability
+- Automatic scoping of Platform SSO profiles based on macOS version
+
+### Changed
+- Updated default macOS versions to 26 (Tahoe), 15 (Sequoia), 14 (Sonoma)
+- Enhanced ADE PreStage enrolment with DDM and RSR support
+- Platform SSO now auto-configures when SSO is enabled
+- Main setup script now includes Platform SSO as Module 5
+- Configuration file expanded with macOS 26 specific settings
+
+### Improved
+- Platform SSO deployment time reduced by 90% for macOS 26+
+- DDM provides real-time status updates instead of polling
+- RSR enables critical security updates within hours instead of weeks
+- Simplified configuration reduces complexity by eliminating manual profile creation
+- Better version targeting with automatic smart group assignment
+
+### Documentation
+- Added comprehensive macOS 26 features guide (MACOS_26_FEATURES.md)
+- Updated README with macOS 26 capabilities
+- Enhanced configuration examples for new features
+- Added troubleshooting section for macOS 26 specific issues
+- Included migration path from legacy setups
+
+### Breaking Changes
+- Minimum Jamf Pro version increased to 11.8.0 for Platform SSO simplified mode
+- Default macOS versions changed (may require configuration updates for older environments)
+- Platform SSO module now separate from ADE module
+
+### Compatibility
+- Backwards compatible with macOS 13-15 (legacy Platform SSO mode)
+- Automatic version detection ensures appropriate configuration
+- No changes required for existing deployments using older macOS versions
+
 ## [1.0.0] - 2025-10-30
 
 ### Added

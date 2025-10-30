@@ -21,13 +21,16 @@ This automation toolkit configures the following components in your Jamf Pro ten
 
 ### Core Features
 - **API Authentication**: OAuth 2.0 client credentials flow with automatic token management
-- **Smart Groups**: macOS version tracking for current and last 2 major versions
+- **Smart Groups**: macOS version tracking for current (26 Tahoe) and last 2 major versions (15 Sequoia, 14 Sonoma)
 - **CIS Benchmarks**: Automated deployment of CIS Level 1 and Level 2 compliance benchmarks
 - **Single Sign-On**: SAML and Azure AD SSO integration for user authentication
 - **Mail Server**: SMTP configuration for notifications and reports
-- **Automated Device Enrolment**: Complete ADE setup with Apple Business Manager integration
+- **Automated Device Enrolment**: Complete ADE setup with Apple Business Manager integration and DDM support
 - **Zero-Touch Deployment**: PreStage enrolment configuration with customisable Setup Assistant screens
 - **User Management**: Automated creation of Jamf Pro user accounts with appropriate privileges
+- **Platform SSO (macOS 26+)**: Simplified Platform SSO that automatically inherits from SSO configuration
+- **Declarative Device Management**: Full DDM support for macOS 26+ devices
+- **Rapid Security Response**: Automatic RSR deployment for critical security updates
 
 ### Additional Capabilities
 - **Jamf Connect Support**: Configuration scaffolding for Jamf Connect deployment
@@ -247,7 +250,17 @@ Manages ADE and PreStage enrolment:
 - Uploads ADE server token
 - Creates zero-touch PreStage enrolment
 - Configures Setup Assistant screens
-- Jamf Connect and Platform SSO scaffolding
+- Enables Declarative Device Management (DDM)
+- Enables Rapid Security Response (RSR)
+- Managed Activation Lock support
+
+#### `jamf-platform-sso.sh`
+Configures Platform SSO (macOS 26+ Enhanced):
+- Simplified Platform SSO for macOS 26 (Tahoe)
+- Automatic inheritance from Jamf Pro SSO settings
+- Legacy mode support for macOS 13-15
+- Smart group creation for version targeting
+- Automatic profile scoping
 
 #### `jamf-users.sh`
 Creates user accounts:

@@ -120,6 +120,7 @@ create_prestage_enrollment() {
     log_info "Creating PreStage enrolment for zero-touch deployment..."
     
     # Build the JSON payload for PreStage enrolment
+    # macOS 26 (Tahoe) enhancements included
     local payload=$(cat <<EOF
 {
   "displayName": "${PRESTAGE_NAME}",
@@ -135,7 +136,7 @@ create_prestage_enrollment() {
   "requireAuthentication": false,
   "authenticationPrompt": "Welcome to ${ORGANISATION_NAME}",
   "preventActivationLock": true,
-  "enableDeviceBasedActivationLock": false,
+  "enableDeviceBasedActivationLock": ${ADE_MANAGED_ACTIVATION_LOCK},
   "deviceEnrollmentProgramInstanceId": ${ade_server_id},
   "skipSetupItems": {
     "Accessibility": ${SKIP_ACCESSIBILITY},
@@ -188,7 +189,15 @@ create_prestage_enrollment() {
   "customPackageIds": [],
   "customPackageDistributionPointId": -1,
   "enableRecoveryLock": false,
-  "recoveryLockPasswordType": "MANUAL"
+  "recoveryLockPasswordType": "MANUAL",
+  "declarativeDeviceManagement": {
+    "enabled": ${ADE_ENABLE_DDM},
+    "autoActivate": ${ADE_DDM_AUTO_ACTIVATE}
+  },
+  "rapidSecurityResponse": {
+    "enabled": ${ADE_ENABLE_RSR},
+    "autoInstall": true
+  }
 }
 EOF
 )
